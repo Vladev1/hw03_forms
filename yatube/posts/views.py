@@ -7,6 +7,7 @@ from .forms import PostForm
 NUM_TITLE = 10
 
 
+@login_required
 def index(request):
     post_list = Post.objects.all().order_by('-pub_date')
     paginator = Paginator(post_list, NUM_TITLE)

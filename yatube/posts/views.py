@@ -27,7 +27,6 @@ def group_posts(request, slug):
     posts = group.posts.all()
     context = {
         'group': group,
-        'posts': posts,
         'page_obj': paginator(request, posts),
     }
     return render(request, 'posts/group_list.html', context)
@@ -39,7 +38,6 @@ def profile(request, username):
     count = post.count()
     context = {
         'author': author,
-        'post': post,
         'count': count,
         'page_obj': paginator(request, post),
     }

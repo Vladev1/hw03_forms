@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .models import Post, Group, User
 from .forms import PostForm
@@ -7,7 +6,6 @@ from .forms import PostForm
 NUM_TITLE = 10
 
 
-@login_required
 def index(request):
     post_list = Post.objects.all().order_by('-pub_date')
     paginator = Paginator(post_list, NUM_TITLE)

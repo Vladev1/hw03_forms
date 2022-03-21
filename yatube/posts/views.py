@@ -19,7 +19,6 @@ def index(request):
     return render(request, 'posts/index.html', context)
 
 
-@login_required
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()
@@ -34,7 +33,6 @@ def group_posts(request, slug):
     return render(request, 'posts/group_list.html', context)
 
 
-@login_required
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     post = author.posts.order_by('-pub_date')
@@ -49,7 +47,6 @@ def profile(request, username):
     return render(request, 'posts/profile.html', context)
 
 
-@login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     author = post.author
@@ -62,7 +59,6 @@ def post_detail(request, post_id):
     return render(request, 'posts/post_detail.html', context)
 
 
-@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -76,7 +72,6 @@ def post_create(request):
     return render(request, 'posts/create_post.html', {'form': form})
 
 
-@login_required
 def post_edit(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':

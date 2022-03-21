@@ -35,10 +35,8 @@ def group_posts(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     post = author.posts.all()
-    count = post.count()
     context = {
         'author': author,
-        'count': count,
         'page_obj': paginator(request, post),
     }
     return render(request, 'posts/profile.html', context)
@@ -47,11 +45,9 @@ def profile(request, username):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     author = post.author
-    count = Post.objects.filter(author=author).count()
     context = {
         'post': post,
-        'author': author,
-        'count': count
+        'author': author
     }
     return render(request, 'posts/post_detail.html', context)
 

@@ -70,7 +70,6 @@ def post_create(request):
     return redirect('posts:profile', username=username)
 
 
-@login_required
 def post_edit(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     user = request.user.username

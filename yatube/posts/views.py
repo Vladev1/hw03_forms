@@ -22,7 +22,7 @@ def index(request):
 @login_required
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.order_by('-pub_date')
+    posts = group.posts.all()
     paginator = Paginator(posts, NUM_TITLE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

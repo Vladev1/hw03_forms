@@ -4,17 +4,20 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+TEXT_IN_FIELD = 15
+
+
 class Group(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-    description = models.TextField()
+    title = models.CharField('Заголовочек', max_length=200)
+    slug = models.SlugField('Слаг адрес', unique=True)
+    description = models.TextField('Описание группы')
 
     def __str__(self):
         return self.title
 
 
 class Post(models.Model):
-    text = models.TextField(verbose_name="Мысли великих")
+    text = models.TextField('Мысли великих')
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         User,
@@ -27,11 +30,11 @@ class Post(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts',
-        verbose_name="Могучие кучки"
+        verbose_name="Могучие группы"
     )
 
     class Meta:
         ordering = ['-pub_date']
 
     def __str__(self):
-        return self.text
+        return self.text[:TEXT_IN_FIELD]

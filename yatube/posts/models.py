@@ -18,11 +18,12 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField('Мысли великих')
-    pub_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='posts'
+        related_name='posts',
+        verbose_name='Автор поста'
     )
     group = models.ForeignKey(
         Group,
@@ -30,7 +31,7 @@ class Post(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts',
-        verbose_name="Могучие группы"
+        verbose_name='Могучие группы'
     )
 
     class Meta:

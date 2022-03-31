@@ -5,14 +5,14 @@ from ..models import Post, Group
 User = get_user_model()
 
 
-class PostModelTest(TestCase):
+class PostsModelTest(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
         cls.user = User.objects.create_user(username='auth')
         cls.group = Group.objects.create(
             title="Заголовок тестовой задачи",
-            slug="Тестовый Слаг",
+            slug="test-slug",
             description="Описание тестовой группы"
         )
         cls.post = Post.objects.create(
@@ -20,8 +20,9 @@ class PostModelTest(TestCase):
             text="Описание тестового поста"
         )
 
-    def test_name_group_have_correct_object_names(self):
-        group = PostModelTest.group
+    def test_models_name_group_have_correct_object_names(self):
+        """" Просмотр тестов имени группы."""
+        group = PostsModelTest.group
         field_verboses = {
             'title': 'Заголовочек',
             'slug': 'Слаг адрес',
@@ -32,8 +33,9 @@ class PostModelTest(TestCase):
                 response = group._meta.get_field(field).verbose_name
                 self.assertEqual(response, expected_value)
 
-    def test_post_have_correct_object_names(self):
-        post = PostModelTest.post
+    def test_models_post_have_correct_object_names(self):
+        """" Просмотр тестов имени поста."""
+        post = PostsModelTest.post
         field_verboses = {
             'text': 'Мысли великих'
         }
@@ -43,5 +45,6 @@ class PostModelTest(TestCase):
                 self.assertEqual(response, expected)
 
     def test_models_have_correct_object_names(self):
-        post = PostModelTest.post
+        """" Просмотр количества символов поста."""
+        post = PostsModelTest.post
         self.assertEqual(post.text[:15], str(post))
